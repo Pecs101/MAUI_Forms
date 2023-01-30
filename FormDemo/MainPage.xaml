@@ -1,7 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FormDemo.MainPage">
+             x:Class="FormDemo.MainPage"
+             xmlns:viewmodel="clr-namespace:FormDemo.ViewModel"
+             xmlns:models="clr-namespace:FormDemo.Models"
+             x:DataType="viewmodel:MainViewModel">
 
     <ScrollView>
         <VerticalStackLayout
@@ -9,31 +12,77 @@
             Padding="30,0"
             VerticalOptions="Center">
 
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
-
             <Label
-                Text="Hello, World!"
+                Text="Incira o valor do pagamento que pretende receber!"
                 SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
+                FontSize="16"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center" 
+                />
 
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
+            <Entry
+                x:Name="valueimput"
+                Placeholder="valor"  
+                >
+            </Entry>
 
             <Button
                 x:Name="CounterBtn"
                 Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
+                WidthRequest="300"
+                SemanticProperties.Hint="Counts the number of times you click" 
+                
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Center" />
+
+            <Label  
+                Text="Ultimos 10 apagemntos: "
+                FontAttributes="Bold"  />
+            
+            <ListView ItemsSource="{Binding Billdata}" >
+                
+                <ListView.ItemTemplate >
+                    <DataTemplate x:DataType="models:Billdata">
+                        <ViewCell Height="50">
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"  />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" /> 
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" /> 
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.RowSpan="2"
+                                   Source="billimage.png" 
+                                   Aspect="AspectFill"
+                                   HeightRequest="40"
+                                   WidthRequest="40" />
+                                <Label 
+                                   Grid.Column="1"
+                                   Text="{Binding code}"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Start" />
+                                <Label 
+                                   Grid.Column="1"
+                                   Text="{Binding value}"
+                                   FontAttributes="Bold" 
+                                   VerticalOptions="Center"  Padding="0,20,0,0"/>
+                                <Label  
+                                   Grid.Column="2"
+                                   Text="{Binding issuedate}" 
+                                   FontAttributes="Italic"
+                                   VerticalOptions="End" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
 
         </VerticalStackLayout>
     </ScrollView>
