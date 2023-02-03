@@ -9,9 +9,10 @@ public partial class MainPage : ContentPage
 		BindingContext= viewmodel;
 	}
 
-	private void OnCounterClicked(object sender, EventArgs e)
+	private async void OnCounterClicked(object sender, EventArgs e)
 	{
-        bool answer = DisplayAlert("Question?", "Would you like to play a game", "Yes", "No").GetAwaiter().GetResult();
+		var _value = valueimput.Text;
+        await Shell.Current.GoToAsync($"{nameof(BillingDetailPage)}?Value={_value}", true);
     }
 }
 

@@ -33,13 +33,15 @@
                 SemanticProperties.Hint="Counts the number of times you click" 
                 
                 Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
+                HorizontalOptions="Center" 
+                
+                />
 
             <Label  
                 Text="Ultimos 10 apagemntos: "
                 FontAttributes="Bold"  />
             
-            <ListView ItemsSource="{Binding Billdata}" >
+            <ListView ItemsSource="{Binding Billdata}" SelectionMode="None" >
                 
                 <ListView.ItemTemplate >
                     <DataTemplate x:DataType="models:Billdata">
