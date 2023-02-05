@@ -4,13 +4,33 @@
              x:Class="FormDemo.BillingDetailPage" 
              xmlns:viewmodel="clr-namespace:FormDemo.ViewModel"
              x:DataType="viewmodel:BillingDetailsViewModel"
+             xmlns:sf="clr-namespace:Syncfusion.Maui.Barcode;assembly=Syncfusion.Maui.Barcode"
              Title="BillingDetailPage">
     <StackLayout Padding="20">
         <Label 
-            Text="{Binding Value}"
+            Text="Codigo"
             VerticalOptions="Center" 
             HorizontalOptions="Center"
             FontSize="16" />
+        
+        
+        <sf:SfBarcodeGenerator Value="{Binding Value}"
+                           HeightRequest="200"
+                           WidthRequest="300"
+                           ShowText="True"
+                           TextSpacing="25"
+                           ForegroundColor="Purple"
+                         >
+            <!--<sf:SfBarcodeGenerator.TextStyle>
+                <sf:BarcodeTextStyle TextColor="Red"></sf:BarcodeTextStyle>
+            </sf:SfBarcodeGenerator.TextStyle>-->
+            <sf:SfBarcodeGenerator.Symbology>
+                <sf:QRCode />
+                <!--<sf:Code39 />-->
+                <!--<sf:DataMatrix />-->
+            </sf:SfBarcodeGenerator.Symbology>
+        </sf:SfBarcodeGenerator>
+
         <Button Text="Go Back"  Clicked="Goback" />
     </StackLayout>
 </ContentPage>
